@@ -10,15 +10,30 @@ int main() {
     char originalScale, targetScale;
 
     printf("Enter the temperature value: ");
-    scanf("%lf", &tempInput);
+    if (scanf("%lf", &tempInput) != 1) {
+        printf("Invalid temperature value.\n");
+        return 1;
+    }
 
     printf("Enter the original scale (C, F, or K): ");
-    scanf(" %c", &originalScale);
-    originalScale = toupper(originalScale);
+    if (scanf(" %c", &originalScale) != 1) {
+        printf("Invalid input for original scale.\n");
+        return 1;
+    }
+    originalScale = toupper((unsigned char)originalScale);
+
+    /* reject physically impossible negative Kelvin input */
+    if (originalScale == 'K' && tempInput < 0.0) {
+        printf("Invalid temperature: Kelvin cannot be negative.\n");
+        return 1;
+    }
 
     printf("Enter the scale to convert to (C, F, or K): ");
-    scanf(" %c", &targetScale);
-    targetScale = toupper(targetScale);
+    if (scanf(" %c", &targetScale) != 1) {
+        printf("Invalid input for target scale.\n");
+        return 1;
+    }
+    targetScale = toupper((unsigned char)targetScale);
 
     tempC = toCelsius(tempInput, originalScale);
     if (tempC == -9999) {
@@ -34,7 +49,13 @@ int main() {
 
     printf("Converted temperature: %.2lf %c\n", convertedTemp, targetScale);
 
-    categorizeTemperature(tempC);
+    /* categorize the converted temperature: convert convertedTemp to Celsius first */
+    double converted_in_c = toCelsius(convertedTemp, targetScale);
+    if (converted_in_c == -9999) {
+        printf("Internal error converting to Celsius for categorization.\n");
+        return 1;
+    }
+    categorizeTemperature(converted_in_c);
 
     return 0;
 }
