@@ -18,7 +18,7 @@ int main(void) {
             continue;
         }
 
-        printf("Possible combinations of scoring plays if a team’s score is %d:\n", nflscore);
+        printf("Possible combinations of scoring plays if a team's score is %d:\n", nflscore);
 
         int found = 0;
         for (int td2 = 0; td2 <= nflscore / 8; td2++) {

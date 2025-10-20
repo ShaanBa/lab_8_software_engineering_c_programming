@@ -22,7 +22,6 @@ int main() {
     }
     originalScale = toupper((unsigned char)originalScale);
 
-    /* reject physically impossible negative Kelvin input */
     if (originalScale == 'K' && tempInput < 0.0) {
         printf("Invalid temperature: Kelvin cannot be negative.\n");
         return 1;
