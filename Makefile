@@ -9,10 +9,10 @@ SOURCES = nfl.c temp_converter.c
 all: $(TARGETS)
 
 nfl: nfl.c
-    $(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $<
 
 temp_converter: temp_converter.c
-    $(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
-    rm -f $(TARGETS) *.o
+	rm -f $(TARGETS) *.o
