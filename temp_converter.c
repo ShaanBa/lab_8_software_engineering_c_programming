@@ -49,7 +49,6 @@ int main() {
 
     printf("Converted temperature: %.2lf %c\n", convertedTemp, targetScale);
 
-    /* categorize the converted temperature: convert convertedTemp to Celsius first */
     double converted_in_c = toCelsius(convertedTemp, targetScale);
     if (converted_in_c == -9999) {
         printf("Internal error converting to Celsius for categorization.\n");
